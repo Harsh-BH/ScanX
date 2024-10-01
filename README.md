@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DeepTrace
 
-## Getting Started
+**DeepTrace** is an innovative blockchain-based platform designed to combat the growing issue of deepfake videos by leveraging advanced technology and ensuring user privacy. By utilizing the immutable and decentralized nature of blockchain, DeepTrace delivers a highly accurate and trustworthy solution for detecting and mitigating deepfake content worldwide.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### AI-Enhanced Multi-Model Detection
+
+DeepTrace employs a multi-model approach, combining insights from various AI models to enhance detection accuracy and provide a more reliable assessment of video authenticity. This feature allows for:
+
+- **Rapid Detection**: Quick identification of deepfake content across platforms, enabling timely interventions.
+- **Scalability**: Suitable for both individual users and large enterprises, supporting high volumes of video processing.
+
+### Blockchain-Backed Verification
+
+DeepTrace integrates blockchain technology, similar to C2PA, to securely embed verification details directly into a video’s metadata. This approach offers:
+
+- **Immutable Records**: Ensures that once a video is created or modified, its authenticity and history are permanently recorded.
+- **Traceability**: Easy tracing of the video's origins and modifications, ensuring content trustworthiness and transparency.
+
+### How to set up Python backend
+
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+pip install -r requirements.txt
+cd models
+git clone https://github.com/polimi-ispl/icpr2020dfdc
+cd icpr2020dfdc/notebook
+python3 ../../app.py
+```
