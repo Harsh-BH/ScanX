@@ -3,7 +3,7 @@ import { getUserDetails } from "../../APIs/userDetails";
 import logo from "/src/assets/deeptrace_logo_transparent.png";
 import Scene from './Scene'; // Adjust the path as needed
 import './Scene.scss'; // Import the SCSS styles
-
+import { useRef } from 'react';
 
 
 function Home() {
@@ -17,47 +17,70 @@ function Home() {
     };
     fetchUserDetails();
   }, []);
+  
+  const containerRef = useRef(null);
+
+  // Add an event listener to capture the wheel scroll and translate it to horizontal scroll
+  useEffect(() => {
+    const container = containerRef.current;
+
+    const handleScroll = (e) => {
+      e.preventDefault();
+      container.scrollLeft += e.deltaY; // Horizontal scroll when vertical wheel movement
+    };
+
+    // Attach the event listener
+    if (container) {
+      container.addEventListener('wheel', handleScroll);
+    }
+
+    // Clean up the event listener on unmount
+    return () => {
+      if (container) {
+        container.removeEventListener('wheel', handleScroll);
+      }
+    };
+  }, []);
+  
 
   return (
-    <div className="flex flex-row h-screen overflow-x-auto overflow-y-hidden scrollbar-hide">
+    <div
+      ref={containerRef}
+      className="flex flex-row h-[100vh] overflow-y-hidden overflow-x-auto scrollbar-hide"
+    >
       {/* First Section */}
-      <div className="text-white h-screen flex flex-col justify-top items-start flex-shrink-0 w-screen">
-        <div className="  h-screen w-screen px-11 py-11">
+      <div className="text-white h-screen flex flex-col justify-top items-start flex-shrink-0 w-screen scrollbar-hide">
+        <div className="h-screen w-screen px-11 py-11">
           {/* Left Side - Main Title */}
-          <div className="flex flex-col items-start space-y-4 mt-0">
-          <h1
-  className="font-extrabold"
-  style={{ fontSize: "8rem", lineHeight: 1 }}
->
-  Hello {user.username}, <br />
-  <span className="type-animation">Welcome to </span> <br />
-  <span className="type-animation text-[#ff4b2b]">ScanX</span>
-</h1>
-
+          <div className="flex flex-col items-start space-y-4 mt-0 scrollbar-hide">
+            <h1
+              className="font-extrabold relative xl:text-[7vw] lg:text-[6.5vw] md:text-[40px]"
+              style={{lineHeight: 1 }}
+            >
+              Hello {user.username}, <br />
+              <span className="type-animation">Welcome to </span> <br />
+              <span className="type-animation text-[#ff4b2b]">ScanX</span>
+            </h1>
           </div>
-          <div className="mt-32 ml-96">
-          <Scene />
+          <div className="left-[28vw] top-[67vh] absolute ">
+            <Scene />
           </div>
-
- 
 
           {/* Right Side - Description and Buttons */}
-          <div className="absolute bottom-11 right-0 pr-8">
-            <p className="text-base max-w-xs mb-6">
+          <div className="absolute bottom-11 right-0 pr-8 w-[15vw]">
+            <p className="text-[1vw] max-w-xs mb-6">
               Design Declares is a growing group of designers, design studios,
               agencies, and institutions here to declare a climate and
-              ecological emergency. As part of the global declaration movement,
-              we commit to harnessing the tools of our industry to reimagine,
-              rebuild, and heal our world.
+              ecological emergency.
             </p>
 
             {/* Buttons */}
             <div className="space-y-2">
-              <button className="bg-white text-black hover:bg-[#ff4b2b] hover:text-white py-2 px-4 rounded">
+              <button className="bg-white text-[1.2vw] text-black hover:bg-[#ff4b2b] hover:text-white py-2 px-4 rounded">
                 Menu +
               </button>
               <br />
-              <button className="bg-white text-black hover:bg-[#ff4b2b] hover:text-white py-2 px-4 rounded">
+              <button className="bg-white text-[1.2vw] text-black hover:bg-[#ff4b2b] hover:text-white py-2 px-4 rounded">
                 Declare Now
               </button>
             </div>
@@ -65,7 +88,7 @@ function Home() {
         </div>
       </div>
 
-      {/* Second Section */}
+      {/* Additional sections */}
       <div className="text-white h-screen flex items-start justify-end w-screen flex-shrink-0">
         <div className="container px-4 justify-end text-center w-full">
           {/* Right Side Content */}
@@ -136,7 +159,7 @@ function Home() {
           </div>
         </div>
       </div>
-      {/* Second Section */}
+
       <div className="text-white h-screen flex items-start justify-end w-screen flex-shrink-0">
         <div className="container px-4 justify-end text-center w-full">
           {/* Right Side Content */}
@@ -207,7 +230,7 @@ function Home() {
           </div>
         </div>
       </div>
-      {/* Second Section */}
+
       <div className="text-white h-screen flex items-start justify-end w-screen flex-shrink-0">
         <div className="container px-4 justify-end text-center w-full">
           {/* Right Side Content */}
@@ -278,6 +301,8 @@ function Home() {
           </div>
         </div>
       </div>
+
+      
     </div>
   );
 }
