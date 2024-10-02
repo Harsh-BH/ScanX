@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import { getUserDetails } from "../../APIs/userDetails";
-import Scene from './Scene'; // Adjust the path as needed
-import './Scene.scss'; // Import the SCSS styles
+import Navbar from "../Navbar/Navbar";
+import { FaArrowRight } from "react-icons/fa";
+import { RiAiGenerate } from "react-icons/ri";
 
 
 function Home() {
-  const [user, setUser] = useState(null);
   const containerRef = useRef(null);
   const isScrolling = useRef(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 }); // Track mouse position
@@ -20,12 +19,12 @@ function Home() {
 
   useEffect(() => {
     const container = containerRef.current;
-    const sectionWidth = container.clientWidth;
 
     const handleScroll = (e) => {
       e.preventDefault();
       if (isScrolling.current) return;
 
+      const sectionWidth = container.offsetWidth;
       const currentScroll = container.scrollLeft;
       const maxScroll = container.scrollWidth - sectionWidth;
       const scrollThreshold = sectionWidth;
@@ -74,7 +73,7 @@ function Home() {
         container.removeEventListener('wheel', handleScroll);
       }
     };
-  }, []);
+  }, [scrollTimeout]);
 
   // Track mouse position
   const handleMouseMove = (event) => {
@@ -93,6 +92,10 @@ function Home() {
   }, []);
 
   return (
+    <>
+
+      <Navbar/>
+
     <div
       ref={containerRef}
       className="flex flex-row h-[100vh] overflow-y-hidden overflow-x-auto scrollbar-hide"
@@ -248,6 +251,7 @@ function Home() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

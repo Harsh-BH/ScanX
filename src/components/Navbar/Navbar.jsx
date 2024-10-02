@@ -2,9 +2,10 @@ import React from 'react'
 
 const Navbar = () => {
     return (
-        <nav className="z-100 fixed top-0 px-4 py-4 flex justify-between items-center w-[85%]">
+        <div className='top-0 flex w-screen h-auto justify-center items-center z-50 fixed '>
+        <nav className="z-50 fixed top-0 px-16 py-6 flex justify-between items-center w-full">
             <a className="text-3xl font-bold leading-none" href="#">
-                <p className='text-3xl font-semibold'>ScanX</p>
+                <p className='text-3xl '>SCANX</p>
             </a>
             <div className="lg:hidden">
                 <button className="navbar-burger flex items-center text-blue-600 p-3">
@@ -15,15 +16,16 @@ const Navbar = () => {
                 </button>
             </div>
             <ul className="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
-                <li><a className="text-sm text-gray-400 hover:text-gray-500" href="#">How it works?</a></li>
+                <li><a className="text-md font-semibold text-white transition hover:text-gray-500" href="#">HOW IT WORKS?</a></li>
 
-                <li><a className="text-sm text-gray-400 hover:text-gray-500" href="#">API services</a></li>
+                <li><a className="text-md font-semibold text-white transition hover:text-gray-500" href="#">API SERVICES</a></li>
 
-                <li><a className="text-sm text-gray-400 hover:text-gray-500" href="#">Browser Extension</a></li>
+                <li><a className="text-md font-semibold text-white transition hover:text-gray-500" href="#">BROWSER EXTENSION</a></li>
             </ul>
             <a className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2.5 px-5 bg-[#f1f3f5] hover:bg-[#ddd] text-4 text-gray-900 font-bold  rounded-full transition duration-200" href="/login">Log In</a>
           
         </nav>
+        </div>
     )
 }
 
