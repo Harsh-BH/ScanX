@@ -2,7 +2,7 @@ import React from 'react'
 
 const Navbar = () => {
     return (
-        <div className='flex w-screen h-auto justify-center items-center z-50 fixed '>
+        <div className='top-0 flex w-screen h-auto justify-center items-center z-50 fixed '>
         <nav className="z-50 fixed top-0 px-16 py-6 flex justify-between items-center w-full">
             <a className="text-3xl font-bold leading-none" href="#">
                 <p className='text-3xl '>SCANX</p>
