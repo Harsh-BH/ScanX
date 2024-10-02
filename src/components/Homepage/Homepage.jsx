@@ -1,39 +1,40 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { Suspense,useState, useEffect, useRef } from "react";
 import Navbar from "../Navbar/Navbar";
 import { FaArrowRight } from "react-icons/fa";
 import { RiAiGenerate } from "react-icons/ri";
+import Scene from "./Scene";
+import "./Scene.scss"
+import RCP from "../../models/RCP";
+import { Canvas } from '@react-three/fiber';
+import NECC from "../../models/NECC";
+
 
 
 function Home() {
+  
   const containerRef = useRef(null);
   const isScrolling = useRef(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 }); // Track mouse position
 
-  useEffect(() => {
-    const fetchUserDetails = async () => {
-      const userDetails = await getUserDetails();
-      if (userDetails) setUser(userDetails);
-    };
-    fetchUserDetails();
-  }, []);
+
 
   useEffect(() => {
     const container = containerRef.current;
-
+  
     const handleScroll = (e) => {
       e.preventDefault();
       if (isScrolling.current) return;
-
+  
       const sectionWidth = container.offsetWidth;
       const currentScroll = container.scrollLeft;
       const maxScroll = container.scrollWidth - sectionWidth;
       const scrollThreshold = sectionWidth;
-
+  
       if (e.deltaY > 0) {
         if (currentScroll < maxScroll) {
           const nextScrollPosition = Math.ceil(currentScroll / sectionWidth) + 1;
           const nextScrollLeft = nextScrollPosition * sectionWidth;
-
+  
           if (nextScrollLeft - currentScroll >= scrollThreshold) {
             isScrolling.current = true;
             container.scrollTo({
@@ -49,7 +50,7 @@ function Home() {
         if (currentScroll > 0) {
           const prevScrollPosition = Math.floor(currentScroll / sectionWidth) - 1;
           const prevScrollLeft = prevScrollPosition * sectionWidth;
-
+  
           if (currentScroll - prevScrollLeft >= scrollThreshold) {
             isScrolling.current = true;
             container.scrollTo({
@@ -63,17 +64,18 @@ function Home() {
         }
       }
     };
-
+  
     if (container) {
       container.addEventListener('wheel', handleScroll);
     }
-
+  
     return () => {
       if (container) {
         container.removeEventListener('wheel', handleScroll);
       }
     };
-  }, [scrollTimeout]);
+  }, []); // Removed scrollTimeout dependency
+  
 
   // Track mouse position
   const handleMouseMove = (event) => {
@@ -94,7 +96,6 @@ function Home() {
   return (
     <>
 
-      <Navbar/>
 
     <div
       ref={containerRef}
@@ -107,17 +108,17 @@ function Home() {
     >
       
      {/* First Section */}
-     <div className="text-white h-screen flex flex-col justify-start items-start flex-shrink-0 w-screen scrollbar-hide">
+     <div className="text-white h-screen flex flex-col  flex-shrink-0 w-screen scrollbar-hide">
         <div className="h-screen w-screen px-11 py-11">
           <div className="flex flex-col items-start space-y-4 mt-0 scrollbar-hide">
             <h1 className="font-extrabold relative xl:text-[7vw] lg:text-[8vw] md:text-[40px]" style={{ lineHeight: 1 }}>
-              Hello {user?.username}, <br />
+              Hello <br />
               <span>Welcome to </span> <br />
               <span className="text-[#3b231f] text-glow flicker-hover">ScanX</span>
             </h1>
           </div>
 
-          <div className="left-[28vw] top-[67vh] absolute">
+          <div className="left-[28vw] top-[64vh] absolute">
             <Scene />
           </div>
 
@@ -147,108 +148,74 @@ function Home() {
 
 
       {/* Additional sections */}
-      <div className="text-white h-screen flex items-start justify-end w-screen flex-shrink-0">
-        <div className="container px-4 justify-end text-center w-full">
-          <div className="space-y-4 w-[90%]">
-            <h1 className="font-bold" style={{ fontSize: "4rem", lineHeight: "1.2" }}>
-              The science is settled. We are in an emergency of climate and
-              nature. The world is past breaking point; the breakdown has
-              begun...
-            </h1>
-            <div className="space-y-2">
-              <details className="group">
-                <summary className="text-white py-2 px-4 cursor-pointer flex justify-between items-center">
-                  <span>------------------------------------------</span>
-                  <br />
-                  <span>The Role of Design</span>
-                  <span>&#x25BC;</span>
-                </summary>
-                <div className="p-4 bg-gray-700">
-                  <p>Details about the role of design in the climate emergency.</p>
-                </div>
-              </details>
-              <details className="group">
-                <summary className="text-white py-2 px-4 cursor-pointer flex justify-between items-center">
-                  <span>------------------------------------------</span>
-                  <br />
-                  <span>Time for Change</span>
-                  <span>&#x25BC;</span>
-                </summary>
-                <div className="p-4 bg-gray-700">
-                  <p>It's time for drastic change to counter the climate emergency.</p>
-                </div>
-              </details>
-              <details className="group">
-                <summary className="text-white py-2 px-4 cursor-pointer flex justify-between items-center">
-                  <span>------------------------------------------</span>
-                  <br />
-                  <span>Act with Urgency</span>
-                  <span>&#x25BC;</span>
-                </summary>
-                <div className="p-4 bg-gray-700">
-                  <p>We must act now with a sense of urgency to prevent further damage.</p>
-                </div>
-              </details>
-            </div>
-            <div className="mt-8">
-              <button className="bg-white text-black hover:bg-[#ff4b2b] hover:text-white py-2 px-6 rounded">
-                View our D! Intro Video
-              </button>
-            </div>
-          </div>
+      <div className="text-white h-screen flex flex-col items-start justify-end w-screen flex-shrink-0">
+
+      
+     
+      <div className="text-white h-screen flex flex-row justify-center flex-shrink-0 w-screen ">
+      
+        <div className="flex justify-center h-full blur-main ">
+        <div className="flex justify-center w-[1400px] h-[1400px] absolute left-[14vw] bg-gradient-to-b from-red-500 via-pink-500 to-purple-700 rounded-full shadow-2xl shadow-pink-800"></div>
         </div>
+        <div className="absolute top-[2vh] left-[2vw] 2xl:text-[90px] text-[80px] font-extrabold bg-gradient-to-b from-purple-400 via-pink-500 to-red-300 bg-clip-text text-transparent">
+          UNVEIL THE REAL
+        </div>
+        <div className="absolute top-[17vh] text-[50px] 2xl:text-[60px] font-extrabold">
+          DETECTING DEEPFAKES WITH PRECISION
+        </div>
+
+        <div className="absolute top-[40vh] 2xl:text-[30px] font-extrabold left-[2vw] w-[30vw] text-left text-gray-400">
+        LEVERAGING THE POWER OF BLOCKCHAIN AND MACHINE LEARNING FOR DETECTION OF DEEP FAKE VIDEOS OVER THE INTERNET!
+        </div>
+
+        <div className="absolute top-[77vh] flex  gap-28 w-[40vw] left-[12vw] ">
+          <button className="flex font-semibold text-[1.8vw] justify-center w-1/2 items-center gap-2 text-xl rounded-lg bg-gradient-to-r to-purple-600 from-pink-600 via-purple-700 px-4 py-4 hover:scale-110 hover:translate-y-[-10px] hover:shadow-lg hover:shadow-pink-400/20 transition" onClick={()=>{
+            window.location.href = '/login'
+          }}>
+            <div className='flex items-center gap-2'>TRY NOW </div>
+          </button>
+          <button className="border-2 border-white px-4 py-4 text-[1.8vw] w-1/2 text-xl rounded-lg transition font-semibold hover:scale-110 hover:translate-y-[-10px]">HOW IT WORKS</button>
+        </div>
+
       </div>
 
-      <div className="text-white h-screen flex items-start justify-end w-screen flex-shrink-0">
-        <div className="container px-4 justify-end text-center w-full">
-          <div className="space-y-4 w-[90%]">
-            <h1 className="font-bold" style={{ fontSize: "4rem", lineHeight: "1.2" }}>
-              The science is settled. We are in an emergency of climate and
-              nature. The world is past breaking point; the breakdown has
-              begun...
-            </h1>
-            <div className="space-y-2">
-              <details className="group">
-                <summary className="text-white py-2 px-4 cursor-pointer flex justify-between items-center">
-                  <span>------------------------------------------</span>
-                  <br />
-                  <span>The Role of Design</span>
-                  <span>&#x25BC;</span>
-                </summary>
-                <div className="p-4 bg-gray-700">
-                  <p>Details about the role of design in the climate emergency.</p>
-                </div>
-              </details>
-              <details className="group">
-                <summary className="text-white py-2 px-4 cursor-pointer flex justify-between items-center">
-                  <span>------------------------------------------</span>
-                  <br />
-                  <span>Time for Change</span>
-                  <span>&#x25BC;</span>
-                </summary>
-                <div className="p-4 bg-gray-700">
-                  <p>It's time for drastic change to counter the climate emergency.</p>
-                </div>
-              </details>
-              <details className="group">
-                <summary className="text-white py-2 px-4 cursor-pointer flex justify-between items-center">
-                  <span>------------------------------------------</span>
-                  <br />
-                  <span>Act with Urgency</span>
-                  <span>&#x25BC;</span>
-                </summary>
-                <div className="p-4 bg-gray-700">
-                  <p>We must act now with a sense of urgency to prevent further damage.</p>
-                </div>
-              </details>
-            </div>
-            <div className="mt-8">
-              <button className="bg-white text-black hover:bg-[#ff4b2b] hover:text-white py-2 px-6 rounded">
-                View our D! Intro Video
-              </button>
-            </div>
-          </div>
+   
+
+      </div>
+
+      <div className="text-white h-screen flex flex-col items-start justify-end w-screen flex-shrink-0">
+
+      
+     
+      <div className="text-white h-screen flex flex-row justify-center flex-shrink-0 w-screen ">
+      
+        <div className="flex justify-center h-full blur-main ">
+      
         </div>
+        <div className="absolute top-[2vh] right-[2vw] 2xl:text-[90px] text-[80px] font-extrabold bg-gradient-to-b from-purple-400 via-pink-500 to-red-300 bg-clip-text text-transparent">
+          UNVEIL THE REAL
+        </div>
+        <div className="absolute top-[17vh] text-[50px] 2xl:text-[60px] font-extrabold">
+          DETECTING DEEPFAKES WITH PRECISION
+        </div>
+
+        <div className="absolute top-[40vh] 2xl:text-[30px] font-extrabold right-[2vw] w-[30vw] text-left text-gray-400">
+        LEVERAGING THE POWER OF BLOCKCHAIN AND MACHINE LEARNING FOR DETECTION OF DEEP FAKE VIDEOS OVER THE INTERNET!
+        </div>
+
+        <div className="absolute top-[77vh] flex  gap-28 w-[40vw] right-[12vw] ">
+          <button className="flex font-semibold text-[1.8vw] justify-center w-1/2 items-center gap-2 text-xl rounded-lg bg-gradient-to-r to-purple-600 from-pink-600 via-purple-700 px-4 py-4 hover:scale-110 hover:translate-y-[-10px] hover:shadow-lg hover:shadow-pink-400/20 transition" onClick={()=>{
+            window.location.href = '/login'
+          }}>
+            <div className='flex items-center gap-2'>TRY NOW </div>
+          </button>
+          <button className="border-2 border-white px-4 py-4 text-[1.8vw] w-1/2 text-xl rounded-lg transition font-semibold hover:scale-110 hover:translate-y-[-10px]">HOW IT WORKS</button>
+        </div>
+
+      </div>
+
+   
+
       </div>
     </div>
     </>
