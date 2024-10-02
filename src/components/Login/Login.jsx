@@ -51,6 +51,13 @@ function Login() {
         backdropFilter: 'blur(10px)', // Adds a blur effect for a glowing trail
       }}
     >
+      {/* Show loader if wallet is connected */}
+      {showLoader && (
+        <div className="fixed top-0 left-0 w-full h-full z-50 flex justify-center items-center bg-black bg-opacity-70">
+          <Loader />
+        </div>
+      )}
+
       {/* Top logo and title */}
       <div className='absolute top-10 flex gap-[30px] items-center'>
         <img src={logo} className='h-16' alt="Logo" />
@@ -110,7 +117,7 @@ function Login() {
             <div className='text-3xl font-semibold'>Welcome Back!</div>
             <div className="space-y-4 mt-4">
               <div className='ml-18'>
-                {/* Pass handleWalletConnect as a callback to ConnectButton */}
+              
                 <ConnectButton onConnect={handleWalletConnect} />
               </div>
               <button className="w-full flex items-center justify-center bg-white text-black font-semibold py-2 rounded-full shadow hover:bg-gray-200 transition">
@@ -120,9 +127,6 @@ function Login() {
           </div>
         </div>
       </div>
-
-      {/* Show loader if wallet is connected */}
-      {showLoader && <Loader />}
     </div>
   );
 }

@@ -1,30 +1,29 @@
-import "./App.css";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar.jsx";
-import { ArrowRight } from "lucide-react";
 import Landing from "./Landing.jsx";
 import Predict from "./predict.jsx";
 import Home from "./components/Homepage/Homepage.jsx";
-
 import Login from "./components/Login/Login.jsx";
 import VideoUpload from "./prediction.jsx";
-import Result from "./components/Result.jsx";
-// import {ContractDeets} from "./contractDeets.jsx";
+import Dashboard from "./components/Dashboard.jsx";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Landing />} />
-        
-        <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/predict" element={<Predict />} />
-        <Route path="/upload-video" element={<VideoUpload />} />
-        <Route path="/result" element={<Result />} />
-        {/* <Route path="/contract" element={<ContractDeets />} /> */}
-      </Routes>
-    </Router>
+    <div className="App">
+  
+      {/* Your existing Router structure */}
+      <Router>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/predict" element={<Predict />} />
+          <Route path="/upload-video" element={<VideoUpload />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 
