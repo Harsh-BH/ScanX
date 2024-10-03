@@ -8,8 +8,7 @@
   font-weight: 400;
 
   color-scheme: light dark;
-
-
+  /* color: rgba(255, 255, 255, 0.87); */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -27,4 +26,26 @@
 .hide-scrollbar {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;     /* Firefox */
+}
+
+
+/* styles.css or a CSS file imported in your project */
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+    text-shadow: 
+      0 0 5px #ff4b2b,
+      0 0 10px #ff4b2b,
+      0 0 20px #ff4b2b,
+      0 0 40px #ff4b2b;
+  }
+  20%, 24%, 55% {
+    opacity: 0.4;
+    text-shadow: none;
+  }
+}
+
+/* Create a class for the flicker effect */
+.flicker-hover:hover {
+  animation: flicker 1.5s infinite;
 }
