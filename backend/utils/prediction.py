@@ -12,18 +12,39 @@ model = load_xception_model('xception_deepfake_image_5o.h5')
 
 # utils/prediction.py
 
-def predict_faces(faces):
+import cv2  # Make sure OpenCV is imported
+
+def predict_faces(faces, is_video=False):
     predictions = []
-    for face_info in faces:
-        face = face_info['face_image']
-        x = img_to_array(face)
+    
+    for idx, face in enumerate(faces):
+        # If face is a dictionary (from video), extract the face image
+        if is_video:
+            face_image = face['face_image']
+            frame_number = face['frame_number']
+            timestamp = face['timestamp']
+        else:
+            face_image = face  # For images, face itself is the image array
+            frame_number = None  # No frame number for images
+            timestamp = None     # No timestamp for images
+        
+        # Resize the face image to (299, 299) as required by the Xception model
+        face_image = cv2.resize(face_image, (299, 299))
+
+        # Preprocess the face image
+        x = img_to_array(face_image)
         x = preprocess_input(x)
         x = np.expand_dims(x, axis=0)
+        
+        # Predict the probability of being a deepfake
         prob = model.predict(x)[0][0]
+        
+        # Append prediction details
         predictions.append({
-            'frame_number': face_info['frame_number'],
-            'timestamp': face_info['timestamp'],
-            'confidence': prob
+            'confidence': prob,
+            'frame_number': frame_number,
+            'timestamp': timestamp
         })
+    
     return predictions
 

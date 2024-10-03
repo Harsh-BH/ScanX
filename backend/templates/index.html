@@ -1,5 +1,3 @@
-<!-- templates/index.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,15 +10,23 @@
 <body>
     <h1>Deepfake Detection</h1>
     <form id="upload-form">
-        <input type="file" id="video-file" name="video" accept="video/*" required>
+        <label for="file-type">Choose File Type:</label>
+        <select id="file-type">
+            <option value="video">Video</option>
+            <option value="image">Image</option>
+        </select>
+        <br><br>
+        <input type="file" id="file-input" name="file" accept="video/*,image/*" required>
+        <br><br>
         <input type="submit" value="Upload and Analyze">
     </form>
+    
     <div id="explanation">
         <h3>How to Interpret the Results:</h3>
         <p>The confidence percentage indicates the model's confidence that the analyzed faces are fake. A higher percentage means a higher likelihood of being a deepfake.</p>
         <p>A confidence above 50% suggests the face is likely manipulated.</p>
     </div>
-    
+
     <div id="result"></div>
     <div style="width: 100%; height: 400px;">
         <canvas id="confidenceChart"></canvas>

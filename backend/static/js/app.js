@@ -1,17 +1,17 @@
-// static/js/app.js
-
 $(document).ready(function() {
     $('#upload-form').on('submit', function(event) {
         event.preventDefault();
 
-        var fileInput = $('#video-file')[0];
+        var fileInput = $('#file-input')[0];
+        var fileType = $('#file-type').val();
+
         if (fileInput.files.length === 0) {
-            alert('Please select a video file.');
+            alert('Please select a file.');
             return;
         }
 
         var formData = new FormData();
-        formData.append('video', fileInput.files[0]);
+        formData.append('file', fileInput.files[0]);
 
         $('#result').html('Processing...');
 
@@ -27,7 +27,6 @@ $(document).ready(function() {
                 resultHtml += '<p>Total Faces Analyzed: ' + response.total_faces_analyzed + '</p>';
                 resultHtml += '<p>Processing Time: ' + response.processing_time + ' seconds</p>';
 
-                // Optionally display per-frame details
                 if (response.details && response.details.length > 0) {
                     resultHtml += '<h3>Per-frame Analysis:</h3><ul>';
                     response.details.forEach(function(frameInfo) {
@@ -37,8 +36,6 @@ $(document).ready(function() {
                 }
 
                 $('#result').html(resultHtml);
-
-                // Plot the confidence levels
                 plotConfidenceChart(response.details);
             },
             error: function(xhr, status, error) {
