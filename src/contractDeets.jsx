@@ -26,7 +26,7 @@ async function loadProvider() {
     console.log('Contract:', newContract);
   } else {
     console.error('Ethereum object not found, install MetaMask.');
-    alert('MetaMask not installed! Please install MetaMask to continue.');
+
   }
 }
 

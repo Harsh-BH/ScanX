@@ -5,7 +5,9 @@ import { uploadVideo } from "./contractDeets.jsx";
 import { PrismaClient } from '@prisma/client';
 import { ethers } from "ethers";
 
-const prisma = new PrismaClient();
+import VideoServiceABI from "./VideoServiceABI.json";
+
+import axios from 'axios';
 
 
 function VideoUpload() {
@@ -17,110 +19,187 @@ function VideoUpload() {
   const [LoaderActive, setLoaderActive] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 }); // Track mouse position
   const [showTooltip, setShowTooltip] = useState(false); // Tooltip visibility state
+  const [isVideo, setIsVideo] = useState(false);
+
   const containerRef = useRef(null);
   const isScrolling = useRef(false);
+  const contractAddress = "0x93ad45781C4a6A01634876CABc3A3DF2CC8F5241"; // Replace with your deployed contract address
+  const pinataApiKey = '1a194e10593b4f3fd54a';
+const pinataSecretApiKey = '6585e6963e808ed4bf49fab1b4f6180e4d7dc3982b8230165fcc260c60857202';
 
+const uploadToPinata = async (file) => {
+  const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
 
-  const connectMetaMask = async () => {
-    if (window.ethereum) {
-      try {
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        await provider.send("eth_requestAccounts", []); // Request wallet connection
-        const signer = provider.getSigner();
-        const address = await signer.getAddress(); // Get user's public address
-        return address;
-      } catch (error) {
-        console.error("Error connecting MetaMask:", error);
-        alert("Failed to connect MetaMask.");
-      }
-    } else {
-      alert("MetaMask is not installed. Please install MetaMask.");
-    }
-    return null;
-  };
+  let data = new FormData();
+  data.append('file', file);
 
-  // Track mouse position
-  const handleMouseMove = (event) => {
-    setMousePosition({
-      x: event.clientX,
-      y: event.clientY,
+  try {
+    const response = await axios.post(url, data, {
+      maxContentLength: Infinity,
+      maxBodyLength: Infinity,
+      headers: {
+        'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
+        'pinata_api_key': pinataApiKey,
+        'pinata_secret_api_key': pinataSecretApiKey,
+      },
     });
-  };
 
-  useEffect(() => {
-    window.addEventListener("mousemove", handleMouseMove);
+    // Axios automatically parses the response, so you can directly access the data
+    console.log('Response status:', response.status);
+    console.log('Response data:', response.data);
 
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
-
-  const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0];
-    const fileType = selectedFile.type;
-
-    // Only accept video or image files
-    if (fileType.startsWith("video/") || fileType.startsWith("image/")) {
-      setFile(selectedFile);
-      setShowTooltip(false); // Hide tooltip when a valid file is selected
-    } else {
-      alert("Please upload a valid video or image file.");
+    // Check if the response contains the necessary information
+    if (response.status !== 200) {
+      throw new Error(`Pinata upload failed: ${response.statusText}`);
     }
-  };
 
-  const handleUpload = async () => {
-    if (!file) {
-      // Show the tooltip if no file is uploaded
-      setShowTooltip(true);
-  
-      setTimeout(() => {
-        setShowTooltip(false);
-      }, 3000);
+    const result = response.data; // Axios already parses JSON
+    console.log('Pinata Result:', result);
+
+    return result.IpfsHash; // Return IPFS hash of the uploaded file
+  } catch (error) {
+    console.error('Error uploading to Pinata:', error);
+    throw error;
+  }
+};
+
+
+
+const connectMetaMask = async () => {
+  if (window.ethereum) {
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      await provider.send("eth_requestAccounts", []); // Request wallet connection
+      const signer = provider.getSigner();
+      const address = await signer.getAddress(); // Get user's public address
+      return { provider, signer, address };
+    } catch (error) {
+      console.error("Error connecting MetaMask:", error);
+      alert("Failed to connect MetaMask.");
+    }
+  } else {
+    alert("MetaMask is not installed. Please install MetaMask.");
+  }
+  return null;
+};
+
+// Track mouse position
+const handleMouseMove = (event) => {
+  setMousePosition({
+    x: event.clientX,
+    y: event.clientY,
+  });
+};
+
+useEffect(() => {
+  window.addEventListener("mousemove", handleMouseMove);
+
+  return () => {
+    window.removeEventListener("mousemove", handleMouseMove);
+  };
+}, []);
+
+// Handle file selection
+const handleFileChange = (e) => {
+  const selectedFile = e.target.files[0];
+  const fileType = selectedFile.type;
+
+  // Only accept video or image files
+  if (fileType.startsWith("video/") || fileType.startsWith("image/")) {
+    setFile(selectedFile);
+    setIsVideo(fileType.startsWith("video/")); // Set isVideo based on MIME type
+    setShowTooltip(false); // Hide tooltip when a valid file is selected
+  } else {
+    alert("Please upload a valid video or image file.");
+  }
+};
+
+
+// Handle file upload
+const handleUpload = async () => {
+  if (!file) {
+    // Show the tooltip if no file is uploaded
+    setShowTooltip(true);
+
+    setTimeout(() => {
+      setShowTooltip(false);
+    }, 3000);
+    return;
+  }
+
+  try {
+    setLoaderActive(true); // Show loader while uploading
+
+    // Connect to MetaMask and get the user's public address
+    const metaMaskData = await connectMetaMask();
+    if (!metaMaskData) {
+      setLoaderActive(false);
       return;
     }
-  
-    try {
-      // Connect to MetaMask and get the user's public address
-      const publicAddress = await connectMetaMask();
-      if (!publicAddress) {
-        alert("MetaMask connection is required to upload a file.");
-        return;
-      }
-  
-      // Prepare form data with the file and MetaMask address
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("userId", publicAddress);  // MetaMask public address
-  
-      setLoaderActive(true); // Show loader while uploading
-  
-      // Make the POST request to your Flask API at the /predict endpoint
-      const response = await fetch("http://127.0.0.1:5000/predict", {
-        method: "POST",
-        body: formData, // Send formData which includes the media file and MetaMask address
-      });
-  
-      if (!response.ok) {
-        throw new Error("File upload failed");
-      }
-  
-      // Parse the JSON response from the backend
-      const data = await response.json();
-      setResult(data); // Store the result data for rendering
-  
-      console.log("MetaMask Address:", publicAddress);
-      console.log("Backend Response:", data);
-      console.log("Uploaded File:", file);
-  
-      // Navigate to the results page or handle the result as needed
-      navigate("/result", { state: { result: data, fileName: file.name } });
-    } catch (error) {
-      console.error("Error during upload:", error);
-      alert("An error occurred while uploading the file.");
-    } finally {
-      setLoaderActive(false); // Hide loader when done
+
+    const { provider, signer, address } = metaMaskData;
+
+    // Determine the tier number
+    let tierNumber;
+    if (framesPerVideo === 50) tierNumber = 1;
+    else if (framesPerVideo === 100) tierNumber = 2;
+    else if (framesPerVideo === 300) tierNumber = 3;
+    else tierNumber = 1; // Default to tier 1
+
+    // Prepare form data with the file and MetaMask address
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("userId", address); // MetaMask public address
+    formData.append("frames_per_video", framesPerVideo);
+
+    // Make the POST request to your Flask API at the /predict endpoint
+    const response = await fetch("http://127.0.0.1:8080/predict", {
+      method: "POST",
+      body: formData, // Send formData which includes the media file and MetaMask address
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || "File upload failed");
     }
-  };
+
+    // Parse the JSON response from the backend
+    const data = await response.json();
+
+    console.log("Backend Response:", data);
+
+    const { fileHash, prediction, confidence, total_faces_analyzed, processing_time, db_id } = data;
+
+    // Initialize the smart contract
+    const videoServiceContract = new ethers.Contract(contractAddress, VideoServiceABI, signer);
+
+    // Get the price for the selected tier
+    const price = await videoServiceContract.getTierPrice(tierNumber);
+
+    // Call the smart contract function to store video details and process payment
+    const tx = await videoServiceContract.purchaseService(
+      fileHash,            // IPFS hash of the video file
+      prediction,          // Result from your backend analysis
+      tierNumber,          // Tier selected by the user
+      { value: price }     // Payment for the selected tier
+    );
+
+    // Wait for the transaction to be mined
+    await tx.wait();
+
+    console.log("Transaction successful:", tx);
+
+    // Navigate to result page with analysis results
+    navigate("/result", { state: { result: data, fileName: file.name } });
+
+  } catch (error) {
+    console.error("Error during upload:", error);
+    alert(`An error occurred: ${error.message}`);
+  } finally {
+    setLoaderActive(false); // Hide loader when done
+  }
+};
+  
   
 
   // Handle horizontal scrolling
@@ -196,13 +275,14 @@ function VideoUpload() {
     >
       {/* Loader Mask */}
       {LoaderActive && (
-        <div className="absolute inset-0 z-50 flex justify-center items-center bg-black bg-opacity-60">
-          <Loader size={64} className="animate-spin text-white" />
-          <div className="text-white text-2xl font-semibold ml-4">
-            Uploading Video...
-          </div>
-        </div>
-      )}
+  <div className="absolute inset-0 z-50 flex justify-center items-center bg-black bg-opacity-60">
+    <Loader size={64} className="animate-spin text-white" />
+    <div className="text-white text-2xl font-semibold ml-4">
+      {isVideo ? "Uploading Video..." : "Uploading Image..."}
+    </div>
+  </div>
+)}
+
 
       {/* First Viewport */}
       <div className="flex flex-col justify-center items-center h-screen w-screen flex-shrink-0">
@@ -221,7 +301,7 @@ function VideoUpload() {
     >
       <ArrowLeft /> Return To Homepage
     </button>
-    <div className="text-5xl font-semibold">Upload Video</div>
+    <div className="text-5xl font-semibold">Upload Video/Image</div>
     <div className="text-2xl font-medium">Select A Tier</div>
     {/* Tier selection */}
     <div className="bg-white/10 backdrop-blur-lg px-6 py-3 rounded-lg border border-[#ffffff10] flex justify-center items-center gap-4">
@@ -236,7 +316,7 @@ function VideoUpload() {
       />
       <label htmlFor="tier1">
         <div className="text-2xl font-semibold">Basic</div>
-        <div>Analyze 50 frames for a 30fps video</div>
+        <div>Analyze 50 frames for a 30fps Video / Image</div>
       </label>
     </div>
     <div className="bg-white/10 backdrop-blur-lg px-6 py-3 rounded-lg border border-[#ffffff10] flex justify-center items-center gap-4">
@@ -250,7 +330,7 @@ function VideoUpload() {
       />
       <label htmlFor="tier2">
         <div className="text-2xl font-semibold">Standard</div>
-        <div>Analyze 100 frames for a 30fps video</div>
+        <div>Analyze 100 frames for a 30fps Video / Image</div>
       </label>
     </div>
     <div className="bg-white/10 backdrop-blur-lg px-6 py-3 rounded-lg border border-[#ffffff10] flex justify-center items-center gap-4">
@@ -264,7 +344,7 @@ function VideoUpload() {
       />
       <label htmlFor="tier3">
         <div className="text-2xl font-semibold">Premium</div>
-        <div>Analyze 300+ frames for a 30fps video</div>
+        <div>Analyze 300+ frames for a 30fps Video / Image</div>
       </label>
     </div>
   </div>
@@ -333,13 +413,17 @@ function VideoUpload() {
         No. of Frames to be analyzed: <b>{framesPerVideo}</b>
       </div>
       {file && (
-        <button
-          onClick={() => setFile(null)}
-          className="py-1.5 px-3 bg-[#1e1e1e] hover:bg-[#252525] text-red-600 font-semibold rounded-full"
-        >
-          Remove Video
-        </button>
-      )}
+  <button
+    onClick={() => {
+      setFile(null);
+      setIsVideo(false); // Reset isVideo
+    }}
+    className="py-1.5 px-3 bg-[#1e1e1e] hover:bg-[#252525] text-red-600 font-semibold rounded-full"
+  >
+    Remove
+  </button>
+)}
+
     </div>
 
     <div className="relative">

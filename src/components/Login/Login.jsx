@@ -1,28 +1,32 @@
 import React, { Suspense, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '/src/assets/deeptrace_logo_transparent.png';
-import ConnectButton from '../../Contexts/AppKitProvider';
-import Loader from '../../components/Loader/Loader'; // Import the loader
+
+import Loader from '../Loader/Loader'; // Import the loader
 import TV from '../../models/TV';
 import { Canvas } from '@react-three/fiber';
+import { SignupButton } from '../base/SignupButton';
+import { LoginButton } from '../base/LoginButton';
+import { useAccount } from 'wagmi';
 
 function Login() {
-  const [isWalletConnected, setIsWalletConnected] = useState(false); // Track wallet connection
   const [showLoader, setShowLoader] = useState(false); // Track loader visibility
   const navigate = useNavigate();
-  const [animationIndex, setAnimationIndex] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  // Function to handle wallet connection
-  const handleWalletConnect = () => {
-    setIsWalletConnected(true);
-    setShowLoader(true); // Show loader when wallet is connected
+  const { address } = useAccount();
 
-    // After 3 seconds, hide the loader and navigate to the home page
-    setTimeout(() => {
-      navigate('/home');
-    }, 3000);
-  };
+  // Effect to navigate when the wallet is connected
+  useEffect(() => {
+    if (address) {
+      setShowLoader(true); // Show loader when wallet is connected
+
+      // After 3 seconds, navigate to the home page
+      setTimeout(() => {
+        navigate('/home');
+      }, 3000);
+    }
+  }, [address, navigate]);
 
   // Track mouse position
   const handleMouseMove = (event) => {
@@ -40,7 +44,7 @@ function Login() {
     };
   }, []);
 
-  const animations = ["Animation"];
+  const animations = ['Animation'];
 
   return (
     <div
@@ -53,14 +57,14 @@ function Login() {
     >
       {/* Show loader if wallet is connected */}
       {showLoader && (
-        <div className="fixed top-0 left-0 w-full h-full z-50 flex justify-center items-center bg-black bg-opacity-70">
+        <div className='fixed top-0 left-0 w-full h-full z-50 flex justify-center items-center bg-black bg-opacity-70'>
           <Loader />
         </div>
       )}
 
       {/* Top logo and title */}
       <div className='absolute top-10 flex gap-[30px] items-center'>
-        <img src={logo} className='h-16' alt="Logo" />
+        <img src={logo} className='h-16' alt='Logo' />
         <div className='text-5xl font-bold'>ScanX</div>
       </div>
 
@@ -71,7 +75,7 @@ function Login() {
           <Canvas
             shadows
             camera={{ position: [0, 0, 5], fov: 50 }}
-            className="w-full h-full"
+            className='w-full h-full'
           >
             <ambientLight intensity={0.5} />
             <directionalLight
@@ -112,17 +116,14 @@ function Login() {
 
         {/* Login Form Section */}
         <div className='w-1/2 flex justify-center items-center'>
-          <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6 shadow-lg w-full max-w-md text-center">
+          <div className='bg-white/10 backdrop-blur-lg rounded-lg p-6 shadow-lg w-full max-w-md text-center'>
             <div className='text-lg font-semibold text-[#787878]'>Log In</div>
             <div className='text-3xl font-semibold'>Welcome Back!</div>
-            <div className="space-y-4 mt-4">
+            <div className='space-y-4 mt-4'>
               <div className='ml-18'>
-              
-                <ConnectButton onConnect={handleWalletConnect} />
+                <SignupButton />
               </div>
-              <button className="w-full flex items-center justify-center bg-white text-black font-semibold py-2 rounded-full shadow hover:bg-gray-200 transition">
-                Sign Up with Google
-              </button>
+              
             </div>
           </div>
         </div>

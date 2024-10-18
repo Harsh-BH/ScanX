@@ -49,7 +49,7 @@ const Dashboard = () => {
   // Fetch videos from the backend
   useEffect(() => {
     axios
-      .get("http://localhost:5000/videos")
+      .get("http://127.0.0.1:8080//videos")
       .then((response) => {
         setVideos(response.data);
       })
@@ -129,7 +129,7 @@ const Dashboard = () => {
       <div className="flex ml-11 mt-11">
         <div className="my-10">
           <h2 className="text-5xl font-bold mb-10">DASHBOARD</h2>
-          <p className="text-2xl text-center">HARSH BHATT</p>
+          
         </div>
 
         <div className="flex items-end justify-end gap-11 mb-10 w-[80%] right-0 ml-11">

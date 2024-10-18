@@ -1,0 +1,51 @@
+import { 
+    ConnectWallet,
+  Wallet,
+  WalletDropdown,
+  WalletDropdownBasename, 
+  WalletDropdownFundLink, 
+  WalletDropdownLink, 
+  WalletDropdownDisconnect,
+  } from '@coinbase/onchainkit/wallet'; 
+  import {
+    Address,
+  Avatar,
+  Name,
+  Identity,
+  EthBalance, 
+  } from '@coinbase/onchainkit/identity';
+  import { color } from '@coinbase/onchainkit/theme';
+   
+  export function SignupButton() {
+    return (
+      <div className="flex justify-center">
+        <Wallet>
+  <ConnectWallet text="Sign Up" className='bg-white text-black font-semibold py-2 rounded-full shadow hover:bg-gray-200 transition'>
+    <Avatar className="h-6 w-6" />
+    <Name />
+  </ConnectWallet>
+  <WalletDropdown>
+    <Identity
+ 
+      className="px-4 pt-3 pb-2" 
+      hasCopyAddressOnClick
+    >
+      <Avatar />
+      <Name />
+      <Address />
+      <EthBalance />
+    </Identity>
+    <WalletDropdownBasename />
+    <WalletDropdownLink
+      icon="wallet"
+      href="https://keys.coinbase.com"
+    >
+      Wallet
+    </WalletDropdownLink>
+    <WalletDropdownFundLink />
+    <WalletDropdownDisconnect />
+  </WalletDropdown>
+</Wallet>
+      </div>
+    );
+  }
