@@ -14,8 +14,7 @@ function VideoUpload() {
   const navigate = useNavigate();
   const [file, setFile] = useState(null);
   const [framesPerVideo, setFramesPerVideo] = useState(50); // Default value
-  const [result, setResult] = useState(null);
-  const [tier, setTier] = useState("tier1");
+ 
   const [LoaderActive, setLoaderActive] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 }); // Track mouse position
   const [showTooltip, setShowTooltip] = useState(false); // Tooltip visibility state
@@ -24,44 +23,6 @@ function VideoUpload() {
   const containerRef = useRef(null);
   const isScrolling = useRef(false);
   const contractAddress = "0x93ad45781C4a6A01634876CABc3A3DF2CC8F5241"; // Replace with your deployed contract address
-  const pinataApiKey = '1a194e10593b4f3fd54a';
-const pinataSecretApiKey = '6585e6963e808ed4bf49fab1b4f6180e4d7dc3982b8230165fcc260c60857202';
-
-const uploadToPinata = async (file) => {
-  const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
-
-  let data = new FormData();
-  data.append('file', file);
-
-  try {
-    const response = await axios.post(url, data, {
-      maxContentLength: Infinity,
-      maxBodyLength: Infinity,
-      headers: {
-        'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
-        'pinata_api_key': pinataApiKey,
-        'pinata_secret_api_key': pinataSecretApiKey,
-      },
-    });
-
-    // Axios automatically parses the response, so you can directly access the data
-    console.log('Response status:', response.status);
-    console.log('Response data:', response.data);
-
-    // Check if the response contains the necessary information
-    if (response.status !== 200) {
-      throw new Error(`Pinata upload failed: ${response.statusText}`);
-    }
-
-    const result = response.data; // Axios already parses JSON
-    console.log('Pinata Result:', result);
-
-    return result.IpfsHash; // Return IPFS hash of the uploaded file
-  } catch (error) {
-    console.error('Error uploading to Pinata:', error);
-    throw error;
-  }
-};
 
 
 
@@ -153,7 +114,7 @@ const handleUpload = async () => {
     formData.append("frames_per_video", framesPerVideo);
 
     // Make the POST request to your Flask API at the /predict endpoint
-    const response = await fetch("http://127.0.0.1:8080/predict", {
+    const response = await fetch("http://127.0.0.1:8080/api/predict", {
       method: "POST",
       body: formData, // Send formData which includes the media file and MetaMask address
     });

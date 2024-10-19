@@ -71,7 +71,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 def index():
     return render_template('index.html')
 
-@app.route('/predict', methods=['POST'])
+@app.route('/api/predict', methods=['POST'])
 def predict():
     try:
         # Validate the presence of 'file' and 'userId' in the request
@@ -188,7 +188,7 @@ def predict():
         print("Error:", str(e))  # Log the error message
         return jsonify({"error": str(e)}), 500
 
-@app.route('/videos', methods=['GET'])
+@app.route('/api/videos', methods=['GET'])
 def get_videos():
     try:
         # Retrieve all video records from MongoDB

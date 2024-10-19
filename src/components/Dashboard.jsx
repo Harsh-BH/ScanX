@@ -49,7 +49,7 @@ const Dashboard = () => {
   // Fetch videos from the backend
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8080//videos")
+      .get("http://127.0.0.1:8080/api/videos")
       .then((response) => {
         setVideos(response.data);
       })
