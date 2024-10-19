@@ -7,6 +7,7 @@ import Home from "./components/Homepage/Homepage.jsx";
 import Login from "./components/Login/Login.jsx";
 import VideoUpload from "./prediction.jsx";
 import Dashboard from "./components/Dashboard.jsx";
+import ResultPage from "./ResultPage.jsx";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/predict" element={<Predict />} />
           <Route path="/upload-video" element={<VideoUpload />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/result" element={<ResultPage />} />
         </Routes>
       </Router>
     </div>

@@ -1,0 +1,52 @@
+.graph-container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 45%;
+    margin-left: auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .bar {
+    height: 30px;
+    width: 0;
+    border-radius: 15px;
+    transition: width 1.5s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .bar-title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #f1f3f5;
+  }
+  
+  .bar-total-videos {
+    background: linear-gradient(90deg, #ff1493, #ff69b4);
+  }
+  
+  .bar-fake-videos {
+    background: linear-gradient(90deg, #ff4500, #ff6347);
+  }
+  
+  .bar-total-videos,
+  .bar-fake-videos {
+    /* Ensure each bar is animated smoothly */
+    transition: width 1.5s ease-in-out;
+  }
+  
+  .graph-container h2 {
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  

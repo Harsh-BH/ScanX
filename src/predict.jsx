@@ -39,7 +39,7 @@ function Predict() {
           >
             Upload file
           </label> */}
-            <label className="flex h-48 w-96 w-full cursor-pointer appearance-none items-center justify-center rounded-md border-2 border-dashed border-gray-600 p-6 transition-all hover:border-gray-400">
+            <label className="flex h-48  w-full cursor-pointer appearance-none items-center justify-center rounded-md border-2 border-dashed border-gray-600 p-6 transition-all hover:border-gray-400">
               <div className="space-y-1 text-center">
                 <div className="mx-auto inline-flex h-10 w-10 items-center justify-center rounded-full bg-gray-100">
                   <svg

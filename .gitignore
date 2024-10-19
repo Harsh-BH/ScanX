@@ -34,3 +34,22 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# TensorFlow
+checkpoint
+__pycache__/
+/saved_model/
+*.ckpt
+*.h5
+*.pb
+*.tflite
+events.out.tfevents.*
+
+# Jupyter notebooks cache
+.ipynb_checkpoints/
+
+# Ignore virtual environments
+venv/
+.venv/
+ENV/
+env/

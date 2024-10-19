@@ -8,6 +8,9 @@ export default defineConfig({
   resolve: {
     alias: {
       buffer: 'buffer/',
+    },
+    build: {
+      outDir: 'dist' // Vite's default build output directory
     }
   }
 })
