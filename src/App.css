@@ -4,15 +4,15 @@
 @tailwind utilities;
 
 #root {
-  /* max-width: 1280px; */
-  /* margin: 0 auto; */
-  /* padding: 2rem; */
-  /* text-align: center; */
   font-family: 'Urbanist', sans-serif;
+  background-color: #161618; /* Dark background color */
+  color: #e0e0e0; /* Light text color */
 }
+
 html, body {
   height: auto;
   overflow: auto;
+  background-color: black; /* Ensuring a dark background */
 }
 
 .circle1 {

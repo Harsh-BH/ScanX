@@ -15,13 +15,7 @@ const Navbar = () => {
                     </svg>
                 </button>
             </div>
-            <ul className="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
-                <li><a className="text-md font-semibold text-white transition hover:text-gray-500" href="#">HOW IT WORKS?</a></li>
-
-                <li><a className="text-md font-semibold text-white transition hover:text-gray-500" href="#">API SERVICES</a></li>
-
-                <li><a className="text-md font-semibold text-white transition hover:text-gray-500" href="#">BROWSER EXTENSION</a></li>
-            </ul>
+           
             <a className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2.5 px-5 bg-[#f1f3f5] hover:bg-[#ddd] text-4 text-gray-900 font-bold  rounded-full transition duration-200" href="/login">Log In</a>
           
         </nav>

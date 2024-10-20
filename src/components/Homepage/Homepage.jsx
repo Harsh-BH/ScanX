@@ -176,15 +176,15 @@ function Home() {
               <div className="flex justify-center w-[1400px] h-[1400px] absolute left-[14vw] bg-gradient-to-b from-red-500 via-pink-500 to-purple-700 rounded-full shadow-2xl shadow-pink-800"></div>
             </div>
             <div className="absolute top-[2vh] left-[2vw] 2xl:text-[90px] text-[80px] font-extrabold bg-gradient-to-b from-purple-400 via-pink-500 to-red-300 bg-clip-text text-transparent">
-              UNVEIL THE REAL
+              UNMASK THE TRUTH
             </div>
-            <div className="absolute top-[17vh] text-[50px] 2xl:text-[60px] font-extrabold">
-              DETECTING DEEPFAKES WITH PRECISION
+            <div className="absolute top-[20vh] text-[50px] 2xl:text-[60px] font-extrabold">
+              DETECTING AUTHENTCITY IN EVERY FRAME 
             </div>
 
-            <div className="absolute top-[40vh] 2xl:text-[30px] font-extrabold left-[2vw] w-[30vw] text-left text-gray-400">
-              LEVERAGING THE POWER OF BLOCKCHAIN AND MACHINE LEARNING FOR
-              DETECTION OF DEEP FAKE VIDEOS OVER THE INTERNET!
+            <div className="absolute top-[40vh] 2xl:text-[35px] font-extrabold left-[2vw] w-[30vw] text-left text-gray-400">
+            
+            SPOT THE DIFFERENCE: PRECISION TOOLS FOR AUTHENTICATING VIDEOS AND IMAGES IN A WORLD OF DECEPTION.  
             </div>
 
             <div className="absolute top-[77vh] flex  gap-28 w-[40vw] left-[30vw] ">
@@ -205,15 +205,14 @@ function Home() {
           <div className="text-white h-screen flex flex-row justify-center flex-shrink-0 w-screen ">
             <div className="flex justify-center h-full blur-main "></div>
             <div className="absolute top-[2vh] right-[2vw] 2xl:text-[90px] text-[80px] font-extrabold bg-gradient-to-b from-purple-400 via-pink-500 to-red-300 bg-clip-text text-transparent">
-              UNVEIL THE REAL
+              TRUTH IN TEXT
             </div>
-            <div className="absolute top-[17vh] text-[50px] 2xl:text-[60px] font-extrabold">
-              DETECTING DEEPFAKES WITH PRECISION
+            <div className="absolute top-[20vh] text-[50px] 2xl:text-[60px] font-extrabold">
+              IDENTIFYING THE ORGIN OF EVERY WRITTEN WORD
             </div>
 
-            <div className="absolute top-[40vh] 2xl:text-[30px] font-extrabold right-[2vw] w-[30vw] text-left text-gray-400">
-              LEVERAGING THE POWER OF BLOCKCHAIN AND MACHINE LEARNING FOR
-              DETECTION OF DEEP FAKE VIDEOS OVER THE INTERNET!
+            <div className="absolute top-[40vh] 2xl:text-[35px] font-extrabold right-[2vw] w-[30vw] text-left text-gray-400">
+                WORDS WITH INTEGRITY: YOUR TRUSTED RESOURCE FOR DETECTING AI-GENERATED TEXT VS. GENUINE STUDENT WRITING.
             </div>
 
             <div className="absolute top-[77vh] flex  gap-28 w-[40vw] right-[12vw] ">
@@ -225,9 +224,7 @@ function Home() {
               >
                 <div className="flex items-center gap-2">TRY NOW </div>
               </button>
-              <button className="border-2 border-white px-4 py-4 text-[1.8vw] w-1/2 text-xl rounded-lg transition font-semibold hover:scale-110 hover:translate-y-[-10px]">
-                HOW IT WORKS
-              </button>
+              
             </div>
           </div>
         </div>

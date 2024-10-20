@@ -2,6 +2,11 @@ import {ArrowRight} from 'lucide-react'
 import './App.css'
 import Navbar from './components/Navbar/Navbar.jsx'
 
+
+const handleClick = () => {
+  window.open('https://github.com/Harsh-BH/ScanX', '_blank');
+};
+
 function Landing() {
   return (
     <div id='root' className='w-full h-screen flex justify-center items-center bg-[#1e1e1e]'>
@@ -29,7 +34,12 @@ function Landing() {
           }}>
             <div className='flex items-center gap-2'>TRY NOW <ArrowRight size={20} /></div>
           </button>
-          <button className="border-2 border-white px-4 py-4 text-[1.8vw] w-1/2 text-xl rounded-lg transition font-semibold hover:scale-110 hover:translate-y-[-10px]">HOW IT WORKS</button>
+          <button 
+      className="border-2 border-white px-4 py-4 text-[1.8vw] w-1/2 text-xl rounded-lg transition font-semibold hover:scale-110 hover:translate-y-[-10px]" 
+      onClick={handleClick}
+    >
+      HOW IT WORKS
+    </button>
         </div>
 
       </div>
