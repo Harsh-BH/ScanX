@@ -59,7 +59,7 @@ To clone this repository to your local machine, follow these steps:
 To clone this repository to your local machine, follow these steps:
 
 1. Open your terminal or command prompt.
-2. Open this Drive Link [Drive:](https://drive.google.com/drive/folders/1yK_jxG7ggMf6rmQJ-aU2YClb1iuCWwCm?usp=sharing)
+2. Open this Drive Link [Drive](https://drive.google.com/drive/folders/1yK_jxG7ggMf6rmQJ-aU2YClb1iuCWwCm?usp=sharing)
 3. Download **model_text** folder and **xception_deepfake_image_5o.h5** file.
 4. Paste the downloaded folder and file directly in the ScanX-Backend folder.
 6. Run the following command:
