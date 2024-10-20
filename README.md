@@ -38,7 +38,7 @@
 ![ScanX Logo](https://example.com/path/to/scanx-logo.png)
 
 ## Logo
-<img src="1000194939_x16_fast.jpg" alt="ScanX Logo" width="300" height="200">
+<img src="1000194939_x16_fast.jpg" alt="ScanX Logo" width="300" height="300">
 
 ## Set-up Frontend 
 
