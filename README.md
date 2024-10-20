@@ -1,29 +1,72 @@
-# DeepTrace
+# ScanX
+Unmask the Truth: Blockchain-Powered Verification for Media and Text Authenticity.
 
-**DeepTrace** is an innovative blockchain-based platform designed to combat the growing issue of deepfake videos by leveraging advanced technology and ensuring user privacy. By utilizing the immutable and decentralized nature of blockchain, DeepTrace delivers a highly accurate and trustworthy solution for detecting and mitigating deepfake content worldwide.
+**ScanX** addresses a growing concern in both education and professional settings: distinguishing AI-generated content from authentic human work. With the rise of AI tools like ChatGPT and advanced image and video generators, it's increasingly difficult to verify whether written assignments, images, or videos are genuine. This presents challenges in maintaining academic integrity and authenticity in media. ScanX leverages cutting-edge machine learning models to accurately detect whether text, images, or videos are AI-generated or real, ensuring that both digital and written submissions are fair and trustworthy.
 
 ## Features
 
-### AI-Enhanced Multi-Model Detection
+### Blockchain Based Data Storage
 
-DeepTrace employs a multi-model approach, combining insights from various AI models to enhance detection accuracy and provide a more reliable assessment of video authenticity. This feature allows for:
+**ScanX** leverages blockchain technology to enhance the **security and integrity** of user profiles by securely storing uploaded files—be it videos, images, or texts—along with their corresponding analyses as hashed data. This ensures that each user’s information is protected against unauthorized access and tampering. By converting these files and analyses into hashes, ScanX maintains a **permanent and immutable record** on the blockchain, providing users with verifiable proof of their submissions and analyses. Additionally, all on-chain transactions are meticulously recorded, fostering **transparency** and trust in the system while enabling users to easily track and manage their interactions with the platform.
 
-- **Rapid Detection**: Quick identification of deepfake content across platforms, enabling timely interventions.
-- **Scalability**: Suitable for both individual users and large enterprises, supporting high volumes of video processing.
+## Challenges we ran into
 
-### Blockchain-Backed Verification
+1. Since the models we used are quite large, we pushed the backend on GitHub and uploaded the models separately on a drive link. We tried to use the aws hosting services but its free tier is only for CPU, not for GPU. Since our project requires GPU, we had to host the backend locally on GitHub. 
 
-DeepTrace integrates blockchain technology, similar to C2PA, to securely embed verification details directly into a video’s metadata. This approach offers:
+2. The team members had to put in a lot of efforts to make the website resposive. There was a long process of acceptance and rejection of page design ideas before unanimously agreeing on the final designs.
 
-- **Immutable Records**: Ensures that once a video is created or modified, its authenticity and history are permanently recorded.
-- **Traceability**: Easy tracing of the video's origins and modifications, ensuring content trustworthiness and transparency.
+## Technologies we used
+**Frontend:** Vite+React, Tailwind CSS, Coinbase Smart Wallet, Base Onchain Kit, Three.js
+**Backend:** Flask, Tensorflow, Transformers, Open CV, Hugging Face Models
+**Blockchain:** Solidity, Base Sepolia Network
 
-### How to set up Python backend
+## Links
+[GitHub Repository](URL)
+[Website](URL)
+[Drive Link](URL)
+[Demo Video](URL)
+[Smart Contract](URL)
 
-```
-pip install -r requirements.txt
-cd models
-git clone https://github.com/polimi-ispl/icpr2020dfdc
-cd icpr2020dfdc/notebook
-python3 ../../app.py
-```
+## Cover Image
+![ScanX Logo](https://example.com/path/to/scanx-logo.png)
+
+## Pictures
+![ScanX Logo](https://example.com/path/to/scanx-logo.png)
+![ScanX Logo](https://example.com/path/to/scanx-logo.png)
+![ScanX Logo](https://example.com/path/to/scanx-logo.png)
+![ScanX Logo](https://example.com/path/to/scanx-logo.png)
+![ScanX Logo](https://example.com/path/to/scanx-logo.png)
+
+## Logo
+![ScanX Logo](https://example.com/path/to/scanx-logo.png)
+
+## Setup Frontend 
+
+To clone this repository to your local machine, follow these steps:
+
+1. Open your terminal or command prompt.
+2. Run the following command:
+
+   ```bash
+   git clone https://github.com/ShriyaSinha1809/wallet-connect-website.git
+3. Run the following command:
+
+   ```bash
+   npm install vite
+
+## Setup Backend 
+
+To clone this repository to your local machine, follow these steps:
+
+1. Open your terminal or command prompt.
+2. Run the following command:
+
+   ```bash
+   git clone https://github.com/ShriyaSinha1809/wallet-connect-website.git
+3. Run the following command:
+
+   ```bash
+   npm install vite
+   
+
+
