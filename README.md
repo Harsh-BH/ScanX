@@ -38,7 +38,7 @@
 ![ScanX Logo](https://example.com/path/to/scanx-logo.png)
 
 ## Logo
-![ScanX Logo](https://drive.google.com/file/d/13jiy84VmYLw_h_2pBivaSubX8-eV3X2y/view?usp=sharing)
+![ScanX Logo](1000194939_x16_fast.jpg)
 
 ## Set-up Frontend 
 
