@@ -1,13 +1,11 @@
 import { ArrowLeft, Loader } from "lucide-react";
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { uploadVideo } from "./contractDeets.jsx";
 
 import { ethers } from "ethers";
-
 import VideoServiceABI from "./VideoServiceABI.json";
 
-import axios from 'axios';
+
 import TextUploadComponent from "./components/TextPrediction.jsx";
 
 
@@ -23,7 +21,7 @@ function VideoUpload() {
 
   const containerRef = useRef(null);
   const isScrolling = useRef(false);
-  const contractAddress = "0x93ad45781C4a6A01634876CABc3A3DF2CC8F5241"; // Replace with your deployed contract address
+  const contractAddress = "0x421320EC07463437A6E421fE9BBA872C98EDc511"; // Replace with your deployed contract address
 
 
 
@@ -130,6 +128,7 @@ function VideoUpload() {
 
       console.log("Backend Response:", data);
 
+
       const { fileHash, prediction, confidence, total_faces_analyzed, processing_time, db_id } = data;
 
       // Initialize the smart contract
@@ -150,6 +149,14 @@ function VideoUpload() {
       await tx.wait();
 
       console.log("Transaction successful:", tx);
+
+      try {
+        // Assuming tier is a valid uint8 value
+        let tierPrice = await contract.getTierPrice(tier);
+        console.log("Tier Price:", tierPrice.toString());
+    } catch (error) {
+        console.error("Error during contract call:", error);
+    }
 
       // Navigate to result page with analysis results
       navigate("/result", { state: { result: data, fileName: file.name } });
