@@ -21,11 +21,11 @@
 **Blockchain:** Solidity, Base Sepolia Network
 
 ## Links
-[GitHub Repository](URL)
-[Website](URL)
-[Drive Link](URL)
-[Demo Video](URL)
-[Smart Contract](URL)
+[Backend Repository](https://github.com/Harsh-BH/ScanX-Backend)
+[Website](https://scan-x.vercel.app)
+[Drive Link](https://drive.google.com/drive/folders/1yK_jxG7ggMf6rmQJ-aU2YClb1iuCWwCm?usp=sharing)
+[Demo Video](https://youtu.be/qbM4dyAV7Kg)
+[Smart Contract](https://sepolia.basescan.org/address/0x421320EC07463437A6E421fE9BBA872C98EDc511)
 
 ## Cover Image
 <img src="Screenshot from 2024-10-21 03-40-59.png" width="500" height="300">
