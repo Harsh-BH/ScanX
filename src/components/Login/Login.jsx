@@ -1,6 +1,6 @@
 import React, { Suspense, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import logo from '/src/assets/deeptrace_logo_transparent.png';
+import logo from '/src/assets/1000194939_x16_fast.jpg';
 
 import Loader from '../Loader/Loader'; // Import the loader
 import TV from '../../models/TV';
