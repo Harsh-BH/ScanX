@@ -31,11 +31,13 @@
 ![ScanX Logo](https://example.com/path/to/scanx-logo.png)
 
 ## Pictures
-![ScanX Logo](https://example.com/path/to/scanx-logo.png)
-![ScanX Logo](https://example.com/path/to/scanx-logo.png)
-![ScanX Logo](https://example.com/path/to/scanx-logo.png)
-![ScanX Logo](https://example.com/path/to/scanx-logo.png)
-![ScanX Logo](https://example.com/path/to/scanx-logo.png)
+<img src="Screenshot from 2024-10-21 03-40-59.png" width="300" height="300">
+<img src="Screenshot from 2024-10-21 03-36-41.png" width="300" height="300">
+<img src="Screenshot from 2024-10-21 03-44-13.png" width="300" height="300">
+<img src="Screenshot from 2024-10-21 03-44-24.png" width="300" height="300">
+<img src="Screenshot from 2024-10-21 03-46-49.png" width="300" height="300">
+<img src="Screenshot from 2024-10-21 03-46-25.png" width="300" height="300">
+<img src="Screenshot from 2024-10-21 03-43-38.png" width="300" height="300">
 
 ## Logo
 <img src="1000194939_x16_fast.jpg" alt="ScanX Logo" width="300" height="300">
