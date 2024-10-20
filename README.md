@@ -28,16 +28,16 @@
 [Smart Contract](URL)
 
 ## Cover Image
-<img src="Screenshot from 2024-10-21 03-40-59.png" width="400" height="300">
+<img src="Screenshot from 2024-10-21 03-40-59.png" width="500" height="300">
 
 ## Pictures
 
-<img src="Screenshot from 2024-10-21 03-36-41.png" width="400" height="300">
-<img src="Screenshot from 2024-10-21 03-44-13.png" width="400" height="300">
-<img src="Screenshot from 2024-10-21 03-44-24.png" width="400" height="300">
-<img src="Screenshot from 2024-10-21 03-46-49.png" width="400" height="300">
-<img src="Screenshot from 2024-10-21 03-46-25.png" width="400" height="300">
-<img src="Screenshot from 2024-10-21 03-43-38.png" width="400" height="300">
+<img src="Screenshot from 2024-10-21 03-36-41.png" width="500" height="300">
+<img src="Screenshot from 2024-10-21 03-44-13.png" width="500" height="300">
+<img src="Screenshot from 2024-10-21 03-44-24.png" width="500" height="300">
+<img src="Screenshot from 2024-10-21 03-46-49.png" width="500" height="300">
+<img src="Screenshot from 2024-10-21 03-46-25.png" width="500" height="300">
+<img src="Screenshot from 2024-10-21 03-43-38.png" width="500" height="300">
 
 ## Logo
 <img src="1000194939_x16_fast.jpg" alt="ScanX Logo" width="300" height="300">
