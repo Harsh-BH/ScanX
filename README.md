@@ -1,5 +1,5 @@
 # ScanX
-Unmask the Truth: Blockchain-Powered Verification for Media and Text Authenticity.
+**Unmask the Truth: Blockchain-Powered Verification for Media and Text Authenticity.**
 
 **ScanX** addresses a growing concern in both education and professional settings: distinguishing AI-generated content from authentic human work. With the rise of AI tools like ChatGPT and advanced image and video generators, it's increasingly difficult to verify whether written assignments, images, or videos are genuine. This presents challenges in maintaining academic integrity and authenticity in media. ScanX leverages cutting-edge machine learning models to accurately detect whether text, images, or videos are AI-generated or real, ensuring that both digital and written submissions are fair and trustworthy.
 
@@ -40,7 +40,7 @@ Unmask the Truth: Blockchain-Powered Verification for Media and Text Authenticit
 ## Logo
 ![ScanX Logo](https://example.com/path/to/scanx-logo.png)
 
-## Setup Frontend 
+## Set-up Frontend 
 
 To clone this repository to your local machine, follow these steps:
 
@@ -48,25 +48,29 @@ To clone this repository to your local machine, follow these steps:
 2. Run the following command:
 
    ```bash
-   git clone https://github.com/ShriyaSinha1809/wallet-connect-website.git
+   git clone https://github.com/Harsh-BH/ScanX.git
 3. Run the following command:
 
    ```bash
-   npm install vite
+   npm install 
 
-## Setup Backend 
+## Set-up Backend 
 
 To clone this repository to your local machine, follow these steps:
 
 1. Open your terminal or command prompt.
-2. Run the following command:
+2. Open this Drive Link [Drive:](https://drive.google.com/drive/folders/1yK_jxG7ggMf6rmQJ-aU2YClb1iuCWwCm?usp=sharing)
+3. Download **model_text** folder and **xception_deepfake_image_5o.h5** file.
+4. Paste the downloaded folder and file directly in the ScanX-Backend folder.
+6. Run the following command:
 
    ```bash
-   git clone https://github.com/ShriyaSinha1809/wallet-connect-website.git
-3. Run the following command:
+   https://github.com/Harsh-BH/ScanX-Backend.git
+
+7.Make a python environment and Run the following command:
 
    ```bash
-   npm install vite
+   pip install -r requirements.txt
    
 
 
