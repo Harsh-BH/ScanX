@@ -38,18 +38,31 @@
 ![ScanX Logo](https://example.com/path/to/scanx-logo.png)
 
 ## Logo
-![ScanX Logo](https://example.com/path/to/scanx-logo.png)
+![ScanX Logo](https://drive.google.com/file/d/13jiy84VmYLw_h_2pBivaSubX8-eV3X2y/view?usp=sharing)
 
 ## Set-up Frontend 
 
 To clone this repository to your local machine, follow these steps:
 
 1. Open your terminal or command prompt.
-2. Run the following command:
+
+2 **Coinbase Wallet Extension**: You should have the [Coinbase Wallet Extension](https://www.coinbase.com/wallet) installed in your browser and set up with a wallet account.
+
+3. **Connect to the Base Sepolia Network**: Make sure your wallet is connected to the **Base Sepolia Network** with the following configurations:
+
+   - **Network Name**: Base Sepolia
+   - **RPC URL**: `https://chain-proxy.wallet.coinbase.com?targetName=base-sepolia`
+   - **Chain ID**: 84532
+   - **Currency Symbol**: ETH
+   - **Block Explorer URL**: [https://sepolia.basescan.org](https://sepolia.basescan.org)
+
+   > **Tip:** You can add this network in your Coinbase Wallet by going to the "Settings" section in the extension, selecting "Networks," and then clicking "Add Network." Enter the above details to configure it correctly.
+
+4. Run the following command:
 
    ```bash
    git clone https://github.com/Harsh-BH/ScanX.git
-3. Run the following command:
+5. Run the following command:
 
    ```bash
    npm install 
